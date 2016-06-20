@@ -1,10 +1,18 @@
 # Practise Android Stuff
 
-#### For indexing repos created for learning and getting hands-on experience with 3rd party libraries or anything new in android.
+#### Collection of different projects to try out various new Android concepts and for hands-on practise
+
+##### Projects : 
+
+   * Currency Convertor : A simple application that can convert amount from one currency to another from supported list. It uses
+     public [API](https://market.mashape.com/warting/currency-converter#convert) provided by mashape. 
+
 ---
 
-### Dagger2  
+#### Related Repos :
+
+##### Dagger2  
   * [learning-dagger2-casterio](https://github.com/wahibhaq/learning-dagger2-casterio)
 
-### RxJava
+##### RxJava
   * [learning-android-rxjava](https://github.com/wahibhaq/learning-android-rxjava)
