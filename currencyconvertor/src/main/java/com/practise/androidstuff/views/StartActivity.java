@@ -1,7 +1,9 @@
-package com.practise.androidstuff;
+package com.practise.androidstuff.views;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.practise.androidstuff.R;
 
 public class StartActivity extends AppCompatActivity {
 
