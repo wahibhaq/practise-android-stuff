@@ -2,7 +2,6 @@ package com.practise.androidstuff.models;
 
 import com.google.gson.annotations.SerializedName;
 
-//TODO add autovalue support
 public class ConvertedItem {
 
     @SerializedName("from")
