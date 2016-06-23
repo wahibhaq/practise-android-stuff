@@ -6,6 +6,7 @@
    - [ ] Add Rxlifecyle, extend BaseFragment from RxFragment (read why)
    - [ ] Brainstorm and design UI
    - [ ] Implement Fragment and Connect with Network
+   - [ ] Add util package and put all util classes like Connectivity etc
    - [ ] Add Unit Tests
    - [ ] Add Espresso Tests
    
