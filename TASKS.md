@@ -5,7 +5,8 @@
    - [ ] Dagger2 functionality added
    - [ ] Brainstorm and design UI
    - [ ] Implement Fragment and Connect with Network
-   - [ ] Add Tests
+   - [ ] Add Unit Tests
+   - [ ] Add Espresso Tests
    
 #### Blockers
 
