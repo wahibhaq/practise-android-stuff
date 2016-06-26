@@ -1,7 +1,8 @@
 #### ToDos : Currency Convertor
  
-   - [ ] Network Layer added
-   - [ ] Dagger2 functionality added
+   - [x] Network Layer added
+   - [x] Dagger2 functionality added
+   - [ ] Verify both endpoints and implementation
    - [ ] Add AutoValue support to models
    - [ ] Brainstorm and design UI
    - [ ] Implement Fragment and Connect with Network
