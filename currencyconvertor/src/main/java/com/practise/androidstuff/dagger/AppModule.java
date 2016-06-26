@@ -3,6 +3,7 @@ package com.practise.androidstuff.dagger;
 import android.content.Context;
 
 import com.practise.androidstuff.CCApplication;
+import com.practise.androidstuff.CurrencyConvertorManager;
 
 import javax.inject.Singleton;
 
@@ -13,7 +14,6 @@ import dagger.Provides;
 public class AppModule {
 
     private final CCApplication ccApplication;
-
 
     public AppModule(CCApplication ccApplication) {
         this.ccApplication = ccApplication;

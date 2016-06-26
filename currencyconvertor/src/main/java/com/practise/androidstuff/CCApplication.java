@@ -1,11 +1,11 @@
 package com.practise.androidstuff;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.practise.androidstuff.dagger.AppModule;
 import com.practise.androidstuff.dagger.ApplicationComponent;
 import com.practise.androidstuff.dagger.DaggerApplicationComponent;
-import com.practise.androidstuff.dagger.RetroNetworkModule;
 
 public class CCApplication extends Application {
 
@@ -20,7 +20,11 @@ public class CCApplication extends Application {
                 .build();
     }
 
-    public ApplicationComponent getAppComponent() {
+    public ApplicationComponent component() {
         return appComponent;
+    }
+
+    public static CCApplication get(Context context) {
+        return (CCApplication) context.getApplicationContext();
     }
 }

@@ -2,16 +2,20 @@ package com.practise.androidstuff.network;
 
 import android.support.annotation.NonNull;
 
-import com.google.common.collect.ImmutableList;
 import com.practise.androidstuff.models.ConvertedItem;
 import com.practise.androidstuff.models.CurrencyInfoItem;
-import com.practise.androidstuff.models.CurrencyInfoResponse;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import javax.inject.Inject;
 
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -22,6 +26,7 @@ public class RetrofitCurrencyConvertorApi implements CurrencyConvertorApi {
 
     private final RetrofitService retrofitService;
 
+    @Inject
     public RetrofitCurrencyConvertorApi(@NonNull Retrofit retrofit) {
         retrofitService = retrofit.create(RetrofitService.class);
     }
@@ -29,7 +34,7 @@ public class RetrofitCurrencyConvertorApi implements CurrencyConvertorApi {
     public interface RetrofitService {
 
         @GET("/availablecurrencies")
-        Observable<CurrencyInfoResponse> getSupportedCurrencies();
+        Observable<CurrencyInfoItem[]> getSupportedCurrencies();
 
         @GET("/?from={from}&from_amount={from_amount}&to={to}")
         Observable<ConvertedItem> getConvertedValue(@Path("from") String fromCurrency,
@@ -38,13 +43,24 @@ public class RetrofitCurrencyConvertorApi implements CurrencyConvertorApi {
     }
 
     @Override
-    public Observable<ImmutableList<CurrencyInfoItem>> getSupportedCurrencies() {
+    public Observable<ArrayList<CurrencyInfoItem>> getSupportedCurrencies() {
 
         //TODO add onErrorResumeNext
         return retrofitService.getSupportedCurrencies()
-                .map(CurrencyInfoResponse.UNWRAP_FUNCTION)
                 .unsubscribeOn(Schedulers.io())
-                .subscribeOn(Schedulers.io());
+                .subscribeOn(Schedulers.io())
+                .map(new Func1<CurrencyInfoItem[], ArrayList<CurrencyInfoItem>>() {
+                    @Override
+                    public ArrayList<CurrencyInfoItem> call(CurrencyInfoItem[] currencyInfoItems) {
+                        if (currencyInfoItems == null) {
+                            return new ArrayList<CurrencyInfoItem>();
+                        }
+
+                        return new ArrayList<>(Arrays.asList(currencyInfoItems));
+                    }
+                });
+//                .map(CurrencyInfoResponse.UNWRAP_FUNCTION);
+
     }
 
     @Override

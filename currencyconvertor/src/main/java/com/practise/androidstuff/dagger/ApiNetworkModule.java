@@ -25,7 +25,7 @@ public class ApiNetworkModule {
 
     @Singleton
     @Provides
-    @Named(Constants.Injection.Named.CURRENCY_CONVERTOR_BASE_URL)
+    @Named(Constants.Injection.Named.CURRENCY_CONVERTOR_BASE_URL_KEY)
     public String provideBaseUrl() {
         return Constants.Injection.Named.CURRENCY_CONVERTOR_BASE_URL;
     }

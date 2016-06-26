@@ -1,11 +1,17 @@
 package com.practise.androidstuff.dagger;
 
+import com.practise.androidstuff.views.MainFragment;
+import com.practise.androidstuff.views.StartActivity;
+
+import javax.inject.Singleton;
+
 import dagger.Component;
 
-@Component(modules = {AppModule.class, ApiNetworkModule.class, RetroNetworkModule.class})
+@Singleton
+@Component(modules = {AppModule.class, RetroNetworkModule.class, ManagerModule.class})
 public interface ApplicationComponent {
 
-    //inject fragment here
-
+    void inject(StartActivity startActivity);
+    void inject(MainFragment mainFragment);
 
 }
