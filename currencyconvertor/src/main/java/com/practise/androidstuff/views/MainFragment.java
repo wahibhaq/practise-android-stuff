@@ -8,18 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.common.collect.ImmutableList;
 import com.practise.androidstuff.CCApplication;
 import com.practise.androidstuff.CurrencyConvertorManager;
 import com.practise.androidstuff.R;
 import com.practise.androidstuff.models.CurrencyInfoItem;
 
 import java.util.ArrayList;
-import java.util.Currency;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainFragment extends BaseFragment {
 
@@ -48,6 +47,7 @@ public class MainFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         CCApplication.get(getActivity()).component().inject(this);
+        ButterKnife.bind(getActivity());
 
         Bundle arguments = getArguments();
         currencyInfoItems = arguments.getParcelableArrayList(ARGS_CURRENCY_ITEMS);

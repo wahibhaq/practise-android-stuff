@@ -17,8 +17,4 @@ public class ManagerModule {
             RetrofitCurrencyConvertorApi impl) {
         return new CurrencyConvertorManager(impl);
     }
-
-//    CurrencyConvertorManager provideCurrencyConvertorManager(RetrofitCurrencyConvertorApi impl) {
-//        return new CurrencyConvertorManager(impl);
-//    }
 }

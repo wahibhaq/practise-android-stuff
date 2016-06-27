@@ -1,5 +1,9 @@
 package com.practise.androidstuff.network;
 
+/**
+ * To store information which will remain fixed e.g api keys and base url.
+ * Idea taken from https://github.com/CasterIO/Tasko/blob/forecastio/app/src/main/java/com/donnfelker/tasko/Constants.java
+ */
 public final class Constants {
 
     public static final class Injection {

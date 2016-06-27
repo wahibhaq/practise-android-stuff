@@ -53,13 +53,11 @@ public class RetrofitCurrencyConvertorApi implements CurrencyConvertorApi {
                     @Override
                     public ArrayList<CurrencyInfoItem> call(CurrencyInfoItem[] currencyInfoItems) {
                         if (currencyInfoItems == null) {
-                            return new ArrayList<CurrencyInfoItem>();
+                            return new ArrayList<>();
                         }
-
                         return new ArrayList<>(Arrays.asList(currencyInfoItems));
                     }
                 });
-//                .map(CurrencyInfoResponse.UNWRAP_FUNCTION);
 
     }
 

@@ -23,11 +23,6 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-//            Fragment fragment = MainFragment.newInstance();
-//            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.content_frame, fragment)
-//                    .commit();
-
             manager.showWhenReady(this);
         }
     }
