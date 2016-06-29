@@ -36,6 +36,7 @@ def GlassFishVersion = '10.0-b28'
 def RetrofitVersion = '2.0.0-beta4'
 def OkHttpVersion = '3.1.2'
 def RxVersion = '1.1.0'
+def GuavaVersion = '19.0'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -66,6 +67,9 @@ dependencies {
     //UI
     compile 'com.jakewharton:butterknife:8.0.1'
     apt 'com.jakewharton:butterknife-compiler:8.0.0'
+
+    //Utilities
+    compile "com.google.guava:guava:$GuavaVersion"
 
     compile 'com.android.support:design:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'

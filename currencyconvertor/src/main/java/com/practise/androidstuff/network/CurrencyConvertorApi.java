@@ -1,6 +1,5 @@
 package com.practise.androidstuff.network;
 
-import com.google.common.collect.ImmutableList;
 import com.practise.androidstuff.models.ConvertedItem;
 import com.practise.androidstuff.models.CurrencyInfoItem;
 
@@ -12,5 +11,5 @@ public interface CurrencyConvertorApi {
 
     Observable<ArrayList<CurrencyInfoItem>> getSupportedCurrencies();
 
-    Observable<ConvertedItem> getConvertedValue(String fromCurrency, int amount, String toCurrency);
+    Observable<ConvertedItem> getConvertedValue(String fromCurrency, double amount, String toCurrency);
 }

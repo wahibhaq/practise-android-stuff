@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -36,10 +37,10 @@ public class RetrofitCurrencyConvertorApi implements CurrencyConvertorApi {
         @GET("/availablecurrencies")
         Observable<CurrencyInfoItem[]> getSupportedCurrencies();
 
-        @GET("/?from={from}&from_amount={from_amount}&to={to}")
-        Observable<ConvertedItem> getConvertedValue(@Path("from") String fromCurrency,
-                                                    @Path("from_amount") int amount,
-                                                    @Path("to") String toCurrency);
+        @GET("/")
+        Observable<ConvertedItem> getConvertedValue(@Query("from") String fromCurrency,
+                                                    @Query("from_amount") double amount,
+                                                    @Query("to") String toCurrency);
     }
 
     @Override
@@ -62,10 +63,10 @@ public class RetrofitCurrencyConvertorApi implements CurrencyConvertorApi {
     }
 
     @Override
-    public Observable<ConvertedItem> getConvertedValue(String fromCurrency, int amount, String toCurrency) {
-        checkNotNull(fromCurrency);
-        checkNotNull(amount);
-        checkNotNull(toCurrency);
+    public Observable<ConvertedItem> getConvertedValue(String fromCurrency, double amount, String toCurrency) {
+        fromCurrency = checkNotNull(fromCurrency);
+        amount = checkNotNull(amount);
+        toCurrency = checkNotNull(toCurrency);
 
         //TODO add onErrorResumeNext
         return retrofitService.getConvertedValue(fromCurrency, amount, toCurrency)

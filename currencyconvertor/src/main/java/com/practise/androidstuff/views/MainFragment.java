@@ -51,6 +51,7 @@ public class MainFragment extends BaseFragment {
 
         Bundle arguments = getArguments();
         currencyInfoItems = arguments.getParcelableArrayList(ARGS_CURRENCY_ITEMS);
+        manager.performConversion("USD", 100.0, "EUR");
     }
 
     @Nullable
@@ -64,6 +65,6 @@ public class MainFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        testText.setText(currencyInfoItems.toString());
+//        testText.setText(currencyInfoItems.get(0).toString());
     }
 }

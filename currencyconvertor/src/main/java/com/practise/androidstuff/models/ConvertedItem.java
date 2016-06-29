@@ -11,8 +11,24 @@ public class ConvertedItem {
     private String targetCurrency;
 
     @SerializedName("from_amount")
-    private int sourceAmount;
+    private double sourceAmount;
 
     @SerializedName("to_amount")
-    private int targetAmount;
+    private double targetAmount;
+
+    public String getSourceCurrency() {
+        return sourceCurrency;
+    }
+
+    public String getTargetCurrency() {
+        return targetCurrency;
+    }
+
+    public double getSourceAmount() {
+        return sourceAmount;
+    }
+
+    public double getTargetAmount() {
+        return targetAmount;
+    }
 }
