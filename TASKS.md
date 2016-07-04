@@ -10,6 +10,7 @@
    - [ ] Add AutoValue support to models
    - [ ] Brainstorm and design UI
    - [ ] Implement Base Activity and NavDrawer Activity 
+   - [ ] Implement Transition Animation https://github.com/lgvalle/Material-Animations
    - [ ] Add Proper Error handling in Retrofit class
    - [ ] Implement Fragment and Connect with Network
    - [ ] Add Tests
