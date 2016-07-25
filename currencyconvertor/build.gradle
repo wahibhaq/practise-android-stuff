@@ -13,66 +13,110 @@ apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.practise.androidstuff"
-        minSdkVersion 16
-        targetSdkVersion 23
+
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
-        release {
-            minifyEnabled false
+
+        debug {
+            minifyEnabled true
+            // Uses new built-in shrinker http://tools.android.com/tech-docs/new-build-system/built-in-shrinker
+            useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+    }
+
+    // If you need to add more flavors, consider using flavor dimensions.
+    productFlavors {
+        mock {
+            applicationIdSuffix = ".mock"
+        }
+        prod {
+
+        }
+    }
+
+    // Remove mockRelease as it's not needed.
+    android.variantFilter { variant ->
+        if(variant.buildType.name.equals('release')
+                && variant.getFlavors().get(0).name.equals('mock')) {
+            variant.setIgnore(true);
+        }
+    }
+
+    // Always show the result of every unit test, even if it passes.
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
         }
     }
 }
 
-def DaggerVersion = '2.0.2'
-def GlassFishVersion = '10.0-b28'
-def RetrofitVersion = '2.0.0-beta4'
-def OkHttpVersion = '3.1.2'
-def RxVersion = '1.1.0'
-def GuavaVersion = '19.0'
-
+/*
+ Dependency versions are defined in the top level build.gradle file. This helps keeping track of
+ all versions in a single place. This improves readability and helps managing project complexity.
+ */
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
+
+    // App's dependencies, including test
+    compile "com.android.support:appcompat-v7:$rootProject.SupportLibraryVersion"
+    compile "com.android.support:design:$rootProject.SupportLibraryVersion"
+    compile "com.android.support:support-v4:$rootProject.SupportLibraryVersion"
+
+    // Dependencies for local unit tests
+    testCompile "junit:junit:$rootProject.ext.JunitVersion"
+
+    // Dependencies for Android unit tests
+    androidTestCompile "junit:junit:$rootProject.ext.JunitVersion"
+
+    // Resolve conflicts between main and test APK:
+    androidTestCompile "com.android.support:support-annotations:$rootProject.SupportLibraryVersion"
+    androidTestCompile "com.android.support:support-v4:$rootProject.SupportLibraryVersion"
 
     //Dependency Injection
-    compile "com.google.dagger:dagger:$DaggerVersion"
-    apt "com.google.dagger:dagger-compiler:$DaggerVersion"
-    provided "com.google.dagger:dagger-compiler:$DaggerVersion"
-    provided "org.glassfish:javax.annotation:$GlassFishVersion"
-    androidTestCompile "com.google.dagger:dagger:$DaggerVersion"
-    androidTestProvided "org.glassfish:javax.annotation:$GlassFishVersion"
+    compile "com.google.dagger:dagger:$rootProject.DaggerVersion"
+    apt "com.google.dagger:dagger-compiler:$rootProject.DaggerVersion"
+    provided "com.google.dagger:dagger-compiler:$rootProject.DaggerVersion"
+    provided "org.glassfish:javax.annotation:$rootProject.GlassFishVersion"
+    androidTestCompile "com.google.dagger:dagger:$rootProject.DaggerVersion"
+    androidTestProvided "org.glassfish:javax.annotation:$rootProject.GlassFishVersion"
 
     //Networking
-    compile "com.squareup.retrofit2:retrofit:$RetrofitVersion"
-    compile "com.squareup.retrofit2:converter-gson:$RetrofitVersion"
-    compile "com.squareup.retrofit2:adapter-rxjava:$RetrofitVersion"
-    compile "com.squareup.okhttp3:okhttp:$OkHttpVersion"
-    compile 'com.google.code.gson:gson:2.5'
+    compile "com.squareup.retrofit2:retrofit:$rootProject.RetrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.RetrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.RetrofitVersion"
+    compile "com.squareup.okhttp3:okhttp:$rootProject.OkHttpVersion"
+    compile "com.google.code.gson:gson:$rootProject.GsonVersion"
 
     //Rx
-    compile "com.squareup.retrofit2:adapter-rxjava:$RetrofitVersion"
-    compile "io.reactivex:rxjava:$RxVersion"
-    compile "io.reactivex:rxandroid:$RxVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.RetrofitVersion"
+    compile "io.reactivex:rxjava:$rootProject.RxJavaVersion"
+    compile "io.reactivex:rxandroid:$rootProject.RxAndroidVersion"
     compile 'com.jakewharton.rxbinding:rxbinding:0.3.0'
     compile 'com.artemzin.rxjava:proguard-rules:1.1.0.0'
 
     //UI
-    compile 'com.jakewharton:butterknife:8.0.1'
-    apt 'com.jakewharton:butterknife-compiler:8.0.0'
+    compile "com.jakewharton:butterknife:$rootProject.ButterKnifeVersion"
+    apt "com.jakewharton:butterknife-compiler:$rootProject.ButterKnifeVersion"
 
     //Utilities
-    compile "com.google.guava:guava:$GuavaVersion"
-
-    compile 'com.android.support:design:23.4.0'
-    compile 'com.android.support:support-v4:23.4.0'
-    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile "com.google.guava:guava:$rootProject.GuavaVersion"
 
 }
