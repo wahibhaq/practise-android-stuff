@@ -1,4 +1,4 @@
-package com.practise.androidstuff.views;
+package com.practise.androidstuff.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.practise.androidstuff.CCApplication;
-import com.practise.androidstuff.CurrencyConvertorManager;
+import com.practise.androidstuff.managers.CurrencyConvertorManager;
 import com.practise.androidstuff.R;
 import com.practise.androidstuff.models.CurrencyInfoItem;
 

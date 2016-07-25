@@ -1,4 +1,4 @@
-package com.practise.androidstuff.network;
+package com.practise.androidstuff.api;
 
 import android.support.annotation.NonNull;
 
@@ -12,7 +12,6 @@ import javax.inject.Inject;
 
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

@@ -1,7 +1,9 @@
-package com.practise.androidstuff.dagger;
+package com.practise.androidstuff;
 
-import com.practise.androidstuff.views.MainFragment;
-import com.practise.androidstuff.views.StartActivity;
+import com.practise.androidstuff.ui.StartActivity;
+import com.practise.androidstuff.ui.fragments.MainFragment;
+import com.practise.androidstuff.network.ManagerModule;
+import com.practise.androidstuff.network.RetroNetworkModule;
 
 import javax.inject.Singleton;
 

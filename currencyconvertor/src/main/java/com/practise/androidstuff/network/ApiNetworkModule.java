@@ -1,4 +1,4 @@
-package com.practise.androidstuff.dagger;
+package com.practise.androidstuff.network;
 
 import android.content.Context;
 

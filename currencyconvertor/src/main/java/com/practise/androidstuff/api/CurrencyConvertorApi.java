@@ -1,4 +1,4 @@
-package com.practise.androidstuff.network;
+package com.practise.androidstuff.api;
 
 import com.practise.androidstuff.models.ConvertedItem;
 import com.practise.androidstuff.models.CurrencyInfoItem;

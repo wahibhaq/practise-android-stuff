@@ -1,9 +1,8 @@
-package com.practise.androidstuff.dagger;
+package com.practise.androidstuff;
 
 import android.content.Context;
 
 import com.practise.androidstuff.CCApplication;
-import com.practise.androidstuff.CurrencyConvertorManager;
 
 import javax.inject.Singleton;
 

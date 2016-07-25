@@ -1,12 +1,11 @@
-package com.practise.androidstuff.views;
+package com.practise.androidstuff.ui;
 
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.practise.androidstuff.CCApplication;
-import com.practise.androidstuff.CurrencyConvertorManager;
 import com.practise.androidstuff.R;
+import com.practise.androidstuff.managers.CurrencyConvertorManager;
 
 import javax.inject.Inject;
 

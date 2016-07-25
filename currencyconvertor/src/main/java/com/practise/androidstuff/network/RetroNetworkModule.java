@@ -1,7 +1,7 @@
-package com.practise.androidstuff.dagger;
+package com.practise.androidstuff.network;
 
-import com.practise.androidstuff.network.CurrencyConvertorApi;
-import com.practise.androidstuff.network.RetrofitCurrencyConvertorApi;
+import com.practise.androidstuff.api.CurrencyConvertorApi;
+import com.practise.androidstuff.api.RetrofitCurrencyConvertorApi;
 
 import javax.inject.Singleton;
 

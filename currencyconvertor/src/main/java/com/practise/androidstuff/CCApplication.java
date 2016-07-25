@@ -3,10 +3,6 @@ package com.practise.androidstuff;
 import android.app.Application;
 import android.content.Context;
 
-import com.practise.androidstuff.dagger.AppModule;
-import com.practise.androidstuff.dagger.ApplicationComponent;
-import com.practise.androidstuff.dagger.DaggerApplicationComponent;
-
 public class CCApplication extends Application {
 
     private ApplicationComponent appComponent;

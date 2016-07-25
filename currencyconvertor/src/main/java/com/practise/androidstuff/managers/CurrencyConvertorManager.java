@@ -1,15 +1,14 @@
-package com.practise.androidstuff;
+package com.practise.androidstuff.managers;
 
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.common.collect.ImmutableList;
+import com.practise.androidstuff.R;
 import com.practise.androidstuff.models.ConvertedItem;
 import com.practise.androidstuff.models.CurrencyInfoItem;
-import com.practise.androidstuff.network.RetrofitCurrencyConvertorApi;
-import com.practise.androidstuff.views.MainFragment;
+import com.practise.androidstuff.api.RetrofitCurrencyConvertorApi;
+import com.practise.androidstuff.ui.fragments.MainFragment;
 
 import java.util.ArrayList;
 

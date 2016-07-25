@@ -1,4 +1,4 @@
-package com.practise.androidstuff.views;
+package com.practise.androidstuff.ui.fragments;
 
 import android.support.v4.app.Fragment;
 
