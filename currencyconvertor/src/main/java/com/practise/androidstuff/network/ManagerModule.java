@@ -1,6 +1,6 @@
 package com.practise.androidstuff.network;
 
-import com.practise.androidstuff.managers.CurrencyConvertorManager;
+import com.practise.androidstuff.managers.ActiveCurrencyConvertorManager;
 import com.practise.androidstuff.api.RetrofitCurrencyConvertorApi;
 
 import javax.inject.Singleton;
@@ -13,8 +13,8 @@ public class ManagerModule {
 
     @Singleton
     @Provides
-    CurrencyConvertorManager provideCurrencyConvertorManager(
+    ActiveCurrencyConvertorManager provideCurrencyConvertorManager(
             RetrofitCurrencyConvertorApi impl) {
-        return new CurrencyConvertorManager(impl);
+        return new ActiveCurrencyConvertorManager(impl);
     }
 }

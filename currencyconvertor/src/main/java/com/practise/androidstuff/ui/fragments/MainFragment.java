@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.practise.androidstuff.CCApplication;
-import com.practise.androidstuff.managers.CurrencyConvertorManager;
+import com.practise.androidstuff.managers.ActiveCurrencyConvertorManager;
 import com.practise.androidstuff.R;
 import com.practise.androidstuff.models.CurrencyInfoItem;
 
@@ -25,7 +25,7 @@ public class MainFragment extends BaseFragment {
     private static final String ARGS_CURRENCY_ITEMS = "currency_items";
 
     @Inject
-    CurrencyConvertorManager manager;
+    ActiveCurrencyConvertorManager manager;
 
     @BindView(R.id.testText)
     TextView testText;
@@ -33,7 +33,7 @@ public class MainFragment extends BaseFragment {
     private ArrayList<CurrencyInfoItem> currencyInfoItems;
 
 
-    public static MainFragment newInstance(
+    public static MainFragment newInstance (
             @NonNull ArrayList<CurrencyInfoItem> currencyInfoItems) {
 
         MainFragment fragment = new MainFragment();
