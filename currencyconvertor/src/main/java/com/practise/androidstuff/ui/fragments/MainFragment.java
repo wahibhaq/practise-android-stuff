@@ -1,7 +1,6 @@
 package com.practise.androidstuff.ui.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.practise.androidstuff.CCApplication;
-import com.practise.androidstuff.managers.ActiveCurrencyConvertorManager;
 import com.practise.androidstuff.R;
+import com.practise.androidstuff.managers.ActiveCurrencyConvertorManager;
 import com.practise.androidstuff.models.CurrencyInfoItem;
 
 import java.util.ArrayList;
@@ -18,40 +17,31 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 public class MainFragment extends BaseFragment {
 
-    private static final String ARGS_CURRENCY_ITEMS = "currency_items";
-
     @Inject
-    ActiveCurrencyConvertorManager manager;
+    protected ActiveCurrencyConvertorManager manager;
 
     @BindView(R.id.testText)
-    TextView testText;
+    protected TextView testText;
 
-    private ArrayList<CurrencyInfoItem> currencyInfoItems;
+    private Subscription loadCurrencySubscription;
 
-
-    public static MainFragment newInstance (
-            @NonNull ArrayList<CurrencyInfoItem> currencyInfoItems) {
-
-        MainFragment fragment = new MainFragment();
-        Bundle arguments = new Bundle(1);
-        arguments.putParcelableArrayList(ARGS_CURRENCY_ITEMS, currencyInfoItems);
-        fragment.setArguments(arguments);
-        return fragment;
+    public static MainFragment newInstance() {
+        return new MainFragment();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         CCApplication.get(getActivity()).component().inject(this);
-        ButterKnife.bind(getActivity());
-
-        Bundle arguments = getArguments();
-        currencyInfoItems = arguments.getParcelableArrayList(ARGS_CURRENCY_ITEMS);
-        manager.performConversion("USD", 100.0, "EUR");
+//        manager.performConversion("USD", 100.0, "EUR");
     }
 
     @Nullable
@@ -63,8 +53,57 @@ public class MainFragment extends BaseFragment {
     }
 
     @Override
+    public void onDestroyView() {
+        if(loadCurrencySubscription != null && !loadCurrencySubscription.isUnsubscribed()) {
+            loadCurrencySubscription.unsubscribe();
+        }
+        super.onDestroyView();
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        testText.setText(currencyInfoItems.get(0).toString());
+        //TODO load progress bar
+
+        loadCurrencySubscription = manager.loadCurrencies()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .doOnError(new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        //TODO hide progressbar & show error message
+                    }
+                })
+                .subscribe(currencyDataSubscriber());
+
+    }
+
+    /**
+     * Prepares subscriber for the currency list data
+     *
+     * @return Subscriber
+     */
+    private Subscriber<ArrayList<CurrencyInfoItem>> currencyDataSubscriber() {
+        return new Subscriber<ArrayList<CurrencyInfoItem>>() {
+
+            @Override
+            public void onCompleted() {
+                // do nothing
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                // do nothing, error handled in subscribing place
+            }
+
+            @Override
+            public void onNext(ArrayList<CurrencyInfoItem> currencyInfoItems) {
+                //TODO hide progress bar
+                //TODO show currency list or whatever UI
+                testText.setText(currencyInfoItems.get(0).getDescription().toString());
+
+//                getView().setCurrentData(currentData);
+            }
+        };
     }
 }

@@ -42,4 +42,5 @@ ext {
     GuavaVersion = '19.0'
     GsonVersion = '2.7'
     ButterKnifeVersion = '8.2.1'
+    RxTrelloVersion = '0.6.1'
 }
