@@ -2,7 +2,7 @@ package com.practise.androidstuff.managers;
 
 import android.util.Log;
 
-import com.practise.androidstuff.api.RetrofitCurrencyConvertorApi;
+import com.practise.androidstuff.api.CurrencyConvertorApi;
 import com.practise.androidstuff.models.ConvertedItem;
 import com.practise.androidstuff.models.CurrencyInfoItem;
 
@@ -19,14 +19,14 @@ import rx.schedulers.Schedulers;
 @Singleton
 public class ActiveCurrencyConvertorManager implements CurrencyConvertorManager {
 
-    private final RetrofitCurrencyConvertorApi currencyConvertorApi;
+    private final CurrencyConvertorApi currencyConvertorApi;
 
     private ArrayList<CurrencyInfoItem> currencyInfoItems;
 
     private boolean status;
 
     @Inject
-    public ActiveCurrencyConvertorManager(RetrofitCurrencyConvertorApi currencyConvertorApi) {
+    public ActiveCurrencyConvertorManager(CurrencyConvertorApi currencyConvertorApi) {
         this.currencyConvertorApi = currencyConvertorApi;
     }
 
